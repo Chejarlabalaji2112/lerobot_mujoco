@@ -17,3 +17,6 @@
 from .config import RobotConfig
 from .robot import Robot
 from .utils import make_robot_from_config
+
+# ... existing imports
+from .so101_mujoco import SO101MuJoCoConfig, SO101MuJoCoRobot, SO101KeyboardTeleop, SO101KeyboardTeleopConfig

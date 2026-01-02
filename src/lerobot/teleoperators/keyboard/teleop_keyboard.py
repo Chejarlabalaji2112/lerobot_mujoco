@@ -228,7 +228,7 @@ class KeyboardEndEffectorTeleop(KeyboardTeleop):
 
         if self.config.use_gripper:
             action_dict["gripper"] = gripper_action
-
+        print(f"debug from telk{action_dict}")
         return action_dict
 
     def get_teleop_events(self) -> dict[str, Any]:

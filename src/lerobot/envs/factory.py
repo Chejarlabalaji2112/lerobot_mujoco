@@ -158,6 +158,20 @@ def make_env(
             gym_kwargs=cfg.gym_kwargs,
             env_cls=env_cls,
         )
+    if cfg.type == "so101_mujoco":
+        # Note: Ensure src/lerobot/envs/so101_env.py exists and is importable
+        from .so101_env import SO101MuJoCoEnv
+        
+        # Instantiate the environment
+        # You might want to pass cfg arguments here if needed (e.g., cfg.scene_xml_path)
+        env = SO101MuJoCoEnv()
+        
+        # Wrap in SyncVectorEnv to match the expected return type (VectorEnv)
+        # Even for n_envs=1, policies expect a vector interface
+        vec_env = gym.vector.SyncVectorEnv([lambda: env])
+        
+        # Return in the standard dict structure: {suite_name: {task_id: env}}
+        return {"so101_mujoco": {0: vec_env}}
 
     if cfg.gym_id not in gym_registry:
         print(f"gym id '{cfg.gym_id}' not found, attempting to import '{cfg.package_name}'...")

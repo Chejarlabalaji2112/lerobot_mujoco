@@ -150,7 +150,6 @@ def teleop_loop(
 
         # Get teleop action
         raw_action = teleop.get_action()
-
         # Process teleop action through pipeline
         teleop_action = teleop_action_processor((raw_action, obs))
 
